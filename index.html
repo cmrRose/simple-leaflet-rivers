@@ -106,7 +106,12 @@
       }, 
       onEachFeature: function (feature, layer){
         //set the popup content
-        layer.bindPopup(feature.properties.Label)
+          
+        // popup on click: 
+//        layer.bindPopup(feature.properties.Label)
+          
+        // tooltip on hover: 
+        layer.bindTooltip(feature.properties.Label)
       }  
     }).addTo(map); //add points to the map
     
