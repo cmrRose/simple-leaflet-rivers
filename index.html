@@ -52,7 +52,7 @@
     /* ~~~~~~~~ Map ~~~~~~~~ */
     //create a map, center it, and set the zoom level. 
     //set zoomcontrol to false because we will add it in a different corner. 
-    var map = L.map('map', {zoomControl:false}).setView([44.8,-88.5], 7);
+    var map = L.map('map', {zoomControl:false}).setView([44.8,-88.5], 8);
     
         /* ~~~~~~~~ Zoom Control ~~~~~~~~ */
     //place a zoom control in the top right: 
@@ -73,13 +73,19 @@
     "weight": 2,
     "opacity": 1.0
     };
-   
-
-      // Streams, data from NHD 
       
-    var streams = L.geoJSON(namaoStorymapStreams, {style: streamsStyle}).addTo(map); 
-    
+    var waterbodiesStyle = {
+        "color": "#05269e",     /* outline color */
+        "opacity": 1.00,        /* outline opacity */
+        "fill": "#05269e",
+        "fillOpacity": 1.0
         
+    };
+   
+      // Streams, waterbodies, data from NHD 
+    var streams = L.geoJSON(namaoStorymapStreams, {style: streamsStyle}).addTo(map); 
+    var waterbodies = L.geoJSON(namaoStorymapWaterbodies, {style: waterbodiesStyle}).addTo(map);   
+      
     
       
 /* ++++++++++++++++++++  ICONS  ++++++++++++++++++++ */      
