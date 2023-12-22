@@ -143,9 +143,11 @@
           
           
         // tooltip on hover: 
-        layer.bindTooltip(feature.properties.Label,{
-            className: 'leaflet-tooltip-own', 
-            direction: 'right'
+//        layer.bindTooltip(feature.properties.Label,{
+//            className: 'leaflet-tooltip-own', 
+//            direction: 'right'
+//        }), 
+          
         // mouseover/mouseout change icon:   
         layer.on('mouseover', function(e){
             this.setIcon(bigIcon);
