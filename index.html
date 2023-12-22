@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Leaflet map</title>
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+  
+  <!-- Caroline Rose | cmrrose.github.com | Feb 2021 -->
+  
+  <!-- Load Leaflet from a CDN -->
+   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+  
+  
+  
+  <style>
+
+    /* Make the map fill the entire page */
+    #map {
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+     
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+    
+  <script type="text/javascript" src="data.js"></script>
+  <script type="text/javascript" src="countryborders.js"></script>
+  
+  <script>
+    /* JAVASCRIPT */
+    
+    /* ~~~~~~~~ Map ~~~~~~~~ */
+    //create a map, center it, and set the zoom level. 
+    //set zoomcontrol to false because we will add it in a different corner. 
+    var map = L.map('map', {zoomControl:false}).setView([20,-30.0], 1);
+    
+        /* ~~~~~~~~ Zoom Control ~~~~~~~~ */
+    //place a zoom control in the top right: 
+    new L.Control.Zoom({position: 'topright'}).addTo(map);
+
+
+    /* ~~~~~~~~ Map Layers ~~~~~~~~ */
+    //basemap from Open Street Map
+    var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map);
+    
+
+    
+    // countries from Project Linework 
+    var countriesStyle = {
+    "color": "#381585",
+    fillOpacity: 0,
+    "weight": 2,
+    "opacity": 1.0
+    };
+    
+    var countries = L.geoJSON(elmercasual_admin0_polygons, {style: countriesStyle}).addTo(map); 
+    
+    
+    
+    //custom icon, plain blue-grey
+    var bluegreyIcon = new L.Icon({
+        iconUrl: 'bluegrey-marker.png',
+        iconSize: [34, 45],
+        iconAnchor: [19, 45],
+        popupAnchor: [0, -45],
+        shadowUrl: 'markers-shadow@2x.png',
+        shadowSize: [36, 16],
+        shadowAnchor: [14, 15]
+    });
+    
+    function defineIcon(){
+        return bluegreyIcon;
+    }
+    
+    
+    //add the points to the map
+    var datapoints = L.geoJSON(mapdata, {
+      pointToLayer: function (feature, latlng){
+        //references the custom icon defined above
+        return L.marker(latlng, {icon: defineIcon()});
+      }, 
+      onEachFeature: function (feature, layer){
+        //set the popup content
+        layer.bindPopup(feature.properties.label)
+      }  
+    }).addTo(map); //add points to the map
+    
+    
+
+  </script>
+  
+</body>
+</html>
