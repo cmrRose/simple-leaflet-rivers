@@ -62,7 +62,7 @@
     /* ~~~~~~~~ Map Layers ~~~~~~~~ */
     //basemap from Open Street Map
     var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
+        attribution: 'map data &copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors. <a href="https://www.flaticon.com/free-icons/sturgeon" title="sturgeon icons">Sturgeon icon created by B.Genesis - Flaticon</a>.'
       }).addTo(map);
     
    
@@ -81,6 +81,9 @@
     
         
     
+      
+/* ++++++++++++++++++++  ICONS  ++++++++++++++++++++ */      
+    // not in use: 
     //custom icon, plain blue-grey
     var bluegreyIcon = new L.Icon({
         iconUrl: 'bluegrey-marker.png',
@@ -91,35 +94,58 @@
         shadowSize: [36, 16],
         shadowAnchor: [14, 15]
     });
+    
+    
+    // adjustable icon sizes: 
+    var smallIconDiameter = 38;
+    var bigIconDiameter = 50;
       
-    //custom div icon bubble with sturgeon 
-    var sturgeonbubbleicon = new L.divIcon({
-//        ''
-        
+      
+    //custom smaller icon bubble with sturgeon 
+    var sturgeonbubbleicon = new L.icon({
+        iconUrl: 'sturgeon-bubble1.png',
+        iconAnchor: [smallIconDiameter/2, smallIconDiameter/2], 
+        iconSize: [smallIconDiameter, smallIconDiameter],
+        popupAnchor: [0, 0], 
+//        className: 'divIcon-own' 
+    }); 
+      
+     //custom big icon bubble with sturgeon 
+    var bigIcon = new L.icon({
+        iconUrl: 'sturgeon-bubble1.png',
+        iconAnchor: [bigIconDiameter/2, bigIconDiameter/2], 
+        iconSize: [bigIconDiameter, bigIconDiameter],
+        popupAnchor: [0, 0], 
+//        className: 'divIcon-own' 
     });
+
     
-    function defineIcon(){
-//        return bluegreyIcon;
-        return sturgeonbubbleicon; 
-    }
-    
+      
+/* ++++++++++++++++++++  MAP  ++++++++++++++++++++ */          
     
     //add the points to the map
     var datapoints = L.geoJSON(mapdata, {
       pointToLayer: function (feature, latlng){
         //references the custom icon defined above
-        return L.marker(latlng, {icon: defineIcon()});
+        return L.marker(latlng, {icon: sturgeonbubbleicon});
       }, 
       onEachFeature: function (feature, layer){
-        //set the popup content
           
         // popup on click: 
 //        layer.bindPopup(feature.properties.Label)
+          
+          
           
         // tooltip on hover: 
         layer.bindTooltip(feature.properties.Label,{
             className: 'leaflet-tooltip-own', 
             direction: 'right'
+        // mouseover/mouseout change icon:   
+        layer.on('mouseover', function(e){
+            this.setIcon(bigIcon);
+        }), 
+        layer.on('mouseout', function(e){
+            this.setIcon(sturgeonbubbleicon);
         })
       }  
     }).addTo(map); //add points to the map
