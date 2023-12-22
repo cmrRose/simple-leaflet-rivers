@@ -8,9 +8,13 @@
   
   <!-- Caroline Rose | cmrrose.github.com | Dec 2023 -->
   
-  <!-- Load Leaflet from a CDN -->
-   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+    <!-- Load Leaflet from a CDN -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+    
+    <!-- Load Esri Leaflet from CDN -->
+    <script src="https://unpkg.com/esri-leaflet@3.0.10/dist/esri-leaflet.js"></script>
+    <script src="https://unpkg.com/esri-leaflet-vector@4.2.3/dist/esri-leaflet-vector.js"></script>
   
   
   
@@ -53,6 +57,10 @@
   
   <script>
     /* JAVASCRIPT */
+      
+    const apiKey = "AAPKc2e3fb3b96f843e59a76a607ec742694ufBuKFbJAERmjt_zArwY6uWb8AoOe-UDv4j5sEKIKBHlVvpwWBsMF23wsM2B0NCE"; 
+      
+
     
     /* ~~~~~~~~ Map ~~~~~~~~ */
     //create a map, center it, and set the zoom level. 
@@ -65,10 +73,19 @@
 
 
     /* ~~~~~~~~ Map Layers ~~~~~~~~ */
-    //basemap from Open Street Map
-    var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: 'map data &copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors. <a href="https://www.flaticon.com/free-icons/sturgeon" title="sturgeon icons">Sturgeon icon created by B.Genesis - Flaticon</a>.'
+    const esriBasemapEnum = "arcgis/oceans";   
+      
+    //basemap from Esri: 
+    var esriBaseMap = L.esri.Vector.vectorBasemapLayer(esriBasemapEnum, {
+        apiKey: apiKey
       }).addTo(map);
+      
+    //basemap from Open Street Map
+//    var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+//        attribution: 'map data &copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors. <a href="https://www.flaticon.com/free-icons/sturgeon" title="sturgeon icons">Sturgeon icon created by B.Genesis - Flaticon</a>.'
+//      }).addTo(map);
+//      
+    
     
    
     // streams, from the NHD 
