@@ -34,6 +34,11 @@
           font-size: 1.5em;
       }
       
+
+      .leaflet-tooltip-right:before {
+        border-right-color: #113E5C;
+      }   
+      
      
   </style>
 </head>
@@ -68,17 +73,18 @@
    
     // streams, from the NHD 
     var streamsStyle = {
-    "color": "#05269e",
-    fillOpacity: 0,
-    "weight": 2,
-    "opacity": 1.0
+        "color": "#05269e",
+        fillOpacity: 0,
+        "weight": 2,
+        "opacity": 1.0
     };
       
     var waterbodiesStyle = {
-        "color": "#05269e",     /* outline color */
-        "opacity": 1.00,        /* outline opacity */
-        "fill": "#05269e",
-        "fillOpacity": 1.0
+        "fillColor": "#3761a6",     /* fill color */
+        color: "#113E5C",
+        
+     
+        "fillOpacity": 1
         
     };
    
@@ -103,7 +109,7 @@
     
     
     // adjustable icon sizes: 
-    var smallIconDiameter = 38;
+    var smallIconDiameter = 45;
     var bigIconDiameter = 50;
       
       
@@ -142,11 +148,12 @@
           
           
           
-        // tooltip on hover: 
-//        layer.bindTooltip(feature.properties.Label,{
-//            className: 'leaflet-tooltip-own', 
-//            direction: 'right'
-//        }), 
+//         tooltip on hover: 
+        layer.bindTooltip(feature.properties.Label,{
+            className: 'leaflet-tooltip-own', 
+            direction: 'right', 
+            offset: [20,0]
+        }), 
           
         // mouseover/mouseout change icon:   
         layer.on('mouseover', function(e){
