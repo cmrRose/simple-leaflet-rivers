@@ -24,6 +24,16 @@
             left: 0;
             right: 0;
         }
+      
+      .leaflet-tooltip-own{
+          color: #fff; /* text color */ 
+          background-color: #113E5C;
+          border: solid 1px #fff; 
+          padding-left, padding-right: 7px;
+          opacity: 1;
+          font-size: 1.5em;
+      }
+      
      
   </style>
 </head>
@@ -100,7 +110,10 @@
 //        layer.bindPopup(feature.properties.Label)
           
         // tooltip on hover: 
-        layer.bindTooltip(feature.properties.Label)
+        layer.bindTooltip(feature.properties.Label,{
+            className: 'leaflet-tooltip-own', 
+            direction: 'right'
+        })
       }  
     }).addTo(map); //add points to the map
     
