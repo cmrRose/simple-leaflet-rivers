@@ -31,7 +31,10 @@
   <div id="map"></div>
     
   <script type="text/javascript" src="data.js"></script>
-  <script type="text/javascript" src="countryborders.js"></script>
+<!--  <script type="text/javascript" src="countryborders.js"></script>-->
+    <script type="text/javascript" src="storymapstreams.js"></script>
+    <script type="text/javascript" src="storymapwaterbodies.js"></script>
+    
   
   <script>
     /* JAVASCRIPT */
@@ -39,7 +42,7 @@
     /* ~~~~~~~~ Map ~~~~~~~~ */
     //create a map, center it, and set the zoom level. 
     //set zoomcontrol to false because we will add it in a different corner. 
-    var map = L.map('map', {zoomControl:false}).setView([20,-30.0], 1);
+    var map = L.map('map', {zoomControl:false}).setView([44.8,-88.5], 7);
     
         /* ~~~~~~~~ Zoom Control ~~~~~~~~ */
     //place a zoom control in the top right: 
@@ -54,17 +57,30 @@
     
 
     
-    // countries from Project Linework 
-    var countriesStyle = {
-    "color": "#381585",
+//    // countries from Project Linework 
+//    var countriesStyle = {
+//    "color": "#381585",
+//    fillOpacity: 0,
+//    "weight": 2,
+//    "opacity": 1.0
+//    };
+//    
+//    var countries = L.geoJSON(elmercasual_admin0_polygons, {style: countriesStyle}).addTo(map); 
+//    
+    // streams, from the NHD 
+    var streamsStyle = {
+    "color": "#05269e",
     fillOpacity: 0,
     "weight": 2,
     "opacity": 1.0
     };
+   
+
+      // Streams, data from NHD 
+      
+    var streams = L.geoJSON(namaoStorymapStreams, {style: streamsStyle}).addTo(map); 
     
-    var countries = L.geoJSON(elmercasual_admin0_polygons, {style: countriesStyle}).addTo(map); 
-    
-    
+        
     
     //custom icon, plain blue-grey
     var bluegreyIcon = new L.Icon({
@@ -90,7 +106,7 @@
       }, 
       onEachFeature: function (feature, layer){
         //set the popup content
-        layer.bindPopup(feature.properties.label)
+        layer.bindPopup(feature.properties.Label)
       }  
     }).addTo(map); //add points to the map
     
