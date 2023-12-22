@@ -73,13 +73,19 @@
 
 
     /* ~~~~~~~~ Map Layers ~~~~~~~~ */
+      
+      // set up the Esri basemap 
+      // other basemap options can be found here: https://developers.arcgis.com/esri-leaflet/maps/change-the-basemap-style-v2/ 
     const esriBasemapEnum = "arcgis/oceans";   
       
     //basemap from Esri: 
     var esriBaseMap = L.esri.Vector.vectorBasemapLayer(esriBasemapEnum, {
-        apiKey: apiKey
+        apiKey: apiKey, 
+        attribution: '<a href="https://www.flaticon.com/free-icons/sturgeon" title="sturgeon icons">Sturgeon icon created by B.Genesis - Flaticon</a>'
       }).addTo(map);
       
+      
+    //stopped using the OSM basemap.   
     //basemap from Open Street Map
 //    var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 //        attribution: 'map data &copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors. <a href="https://www.flaticon.com/free-icons/sturgeon" title="sturgeon icons">Sturgeon icon created by B.Genesis - Flaticon</a>.'
