@@ -90,7 +90,9 @@
     
     const basemapLayers = {
         "Waters Basemap": esriBasemap("arcgis/oceans").addTo(map),
-        "Streets Basemap": esriBasemap("arcgis/streets")
+        "Streets Basemap": esriBasemap("arcgis/streets"), 
+        "Satellite Imagery Basemap": esriBasemap("arcgis/imagery"),
+        
     }
       
     L.control.layers(basemapLayers, null, {collapsed:true}).addTo(map); 
